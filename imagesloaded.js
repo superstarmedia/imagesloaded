@@ -201,14 +201,14 @@ function defineImagesLoaded( EventEmitter, eventie ) {
   LoadingImage.prototype = new EventEmitter();
 
   LoadingImage.prototype.check = function() {
-    // first check cached any previous images that have same src
-    var cached = cache[ this.img.src ];
-    if ( cached ) {
-      this.useCached( cached );
-      return;
-    }
-    // add this to cache
-    cache[ this.img.src ] = this;
+    // // first check cached any previous images that have same src
+    // var cached = cache[ this.img.src ];
+    // if ( cached ) {
+    //   this.useCached( cached );
+    //   return;
+    // }
+    // // add this to cache
+    // cache[ this.img.src ] = this;
 
     // If complete is true and browser supports natural sizes,
     // try to check for image status manually.
@@ -225,17 +225,17 @@ function defineImagesLoaded( EventEmitter, eventie ) {
     proxyImage.src = this.img.src;
   };
 
-  LoadingImage.prototype.useCached = function( cached ) {
-    if ( cached.isConfirmed ) {
-      this.confirm( cached.isLoaded, 'cached was confirmed' );
-    } else {
-      var _this = this;
-      cached.on( 'confirm', function( image ) {
-        _this.confirm( image.isLoaded, 'cache emitted confirmed' );
-        return true; // bind once
-      });
-    }
-  };
+  // LoadingImage.prototype.useCached = function( cached ) {
+  //   if ( cached.isConfirmed ) {
+  //     this.confirm( cached.isLoaded, 'cached was confirmed' );
+  //   } else {
+  //     var _this = this;
+  //     cached.on( 'confirm', function( image ) {
+  //       _this.confirm( image.isLoaded, 'cache emitted confirmed' );
+  //       return true; // bind once
+  //     });
+  //   }
+  // };
 
   LoadingImage.prototype.confirm = function( isLoaded, message ) {
     this.isConfirmed = true;
